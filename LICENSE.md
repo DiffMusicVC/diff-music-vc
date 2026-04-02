@@ -1,4 +1,4 @@
-© Anonymus authors, 2025
+© Anonymus authors, April 2026
 
 This project is licensed under the [Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)](https://creativecommons.org/licenses/by-nc-sa/4.0) license.
 This means you can share and adapt under the following conditions:
