@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <meta name="description" content=Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion>
+  <meta property="og:title" content=Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion/>
+  <meta property="og:description" content= Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion/>
+
+  <meta property="og:image" content="static/images/overview.PNG" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content=Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion>
+  <meta name="twitter:description" content=Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/overview.PNG">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="Multi-Instrument Synthesis, Diffusion">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="misc/academicons.min.css">
+
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="misc/jquery.min.js"></script>
+  <script src="misc/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+
+</head>
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">Adapting Diffusion-Based Music Synthesis to Speech and Singing Voice Conversion</h1>
+            <div class="is-size-5 publication-authors">
+              <br>
+              <span class="author-block">
+                Anonymus Authors</span>
+                  </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Demo Page</h2>
+    </div>
+  </div>
+
+  <section class="section">
+  <div class="container is-widescreen">
+    <h2 class="title is-3" id="contents">Contents</h2>
+
+      <ul style="list-style-type:disc;padding-left:40px">
+      <li><a href="#section_singing_singstyle111">Singing Voice Conversion Samples&mdash;Singstyle111 Dataset</a></li>
+      <li><a href="#section_singing_pop_winter">Singing Voice Conversion Samples&mdash;Popular Music & Schubert Winterreise</a></li>
+      <li><a href="#section_speech">Speech Voice Conversion Samples</a></li>
+      <li><a href="#section_speech_mushra">Speech MUSHRA-like Listening Test</a></li>
+      <li><a href="#section_singing_mushra">Singing MUSHRA-like Listening Test</a></li>
+      <li><a href="#section_singing_similarity">Singer Similarity Listening Test</a></li>
+      <li><a href="#section_mix">Vocal&ndash;Instrumental Conversion Samples</a></li>
+    </ul>
+
+
+
+  </div>
+
+
+
+  <section class="section">
+  <div class="container is-widescreen">
+    <b>For better visibilty, please use a desktop Google Chrome, Microsoft Edge, or Mozilla Firefox browser.</b>
+    <br><br><br>
+    <h2 class="title is-3" id="section_singing_singstyle111">Singing Voice Conversion Samples&mdash;Singstyle111 Dataset<a href="#contents"><small><small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;[Go to top]</small></small></small></small></a></h2>
+    <p align="justify">
+    The samples in this section are generated using our proposed attention-based T5-Voc model, trained on both speech and singing data.
+    The first column <b>("Source")</b> presents real vocal excerpts that are converted across different singers.
+    Each subsequent column corresponds to a target singer, and the first row <b>("Target")</b> provides a real reference excerpt for each.
+    <br>
+    Originally developed for instrumental music synthesis, this T5-based diffusion model has been effectively adapted for singing voice conversion.
+    The version conditioning mechanism&mdash;implemented using FiLM layers and initially designed for acoustic conditioning in instrumental music synthesis&mdash;can be repurposed to condition on singer identity.
+    <br>
+    Additionally, we use an off-the-shelf phonetic posteriorgram (PPG) extractor, trained only on speech, to condition the model on phonetic content.
+    Despite being trained exclusively on speech, the PPG extractor successfully captures the phonetic content of singing, which is preserved during singer conversion.
+    <br>
+    For a comparison with the <b>FlowMAC</b> model (based on <b>MatchaTTS</b> and <b>ForwardTacotron</b>), refer to the <a href="#section_singing_mushra">singing MUSHRA-like listening test</a> section.
+  </p>
+
+
+
+
+    <div class="columns is-centered">
+
+
+
+      <div class="column">
+          <small><small>
+            <div style="height: 128px;">&nbsp;</div>
+
+            <b>Source 1 (<span style="color:CornflowerBlue">M1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/sing_s2.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Source 2:</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/sing_s4.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Source 3:</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/sing_s6.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Source 4:</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/sing_s7.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+      </div>
+
+
+
+      <div class="column">
+          <small><small>
+
+
+            <br><b>Target (<span style="color:Orchid">F1</span>):</b><br>
+            <audio controls style="width: 240px; height: 50px">
+              <source src="static/samples/reference/singing_F1_ref.mp3", type="audio/mp3">
+            </audio><br><br>
+            <b>Generated (S1, <span style="color:Orchid">F1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s2_tf1.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S2, <span style="color:Orchid">F1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s4_tf1.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S3, <span style="color:Orchid">F1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s6_tf1.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S4, <span style="color:Orchid">F1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s7_tf1.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+      </div>
+
+
+
+
+
+
+
+
+
+      <div class="column">
+          <small><small>
+
+            <br><b>Target (<span style="color:DarkMagenta">F4</span>):</b><br>
+            <audio controls style="width: 240px; height: 50px">
+              <source src="static/samples/reference/singing_F4_ref.mp3", type="audio/mp3">
+            </audio><br><br>
+            <b>Generated (S1, <span style="color:DarkMagenta">F4</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s2_tf4.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S2, <span style="color:DarkMagenta">F4</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s4_tf4.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S3, <span style="color:DarkMagenta">F4</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s6_tf4.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S4, <span style="color:DarkMagenta">F4</span>):</b>
+          <br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s7_tf4.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+
+      </div>
+
+      <div class="column">
+          <small><small>
+
+          <br><b>Target (<span style="color:CornflowerBlue">M1</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/reference/singing_M1_ref.mp3", type="audio/mp3">
+          </audio><br><br>
+          <b>Generated (S1, <span style="color:CornflowerBlue">M1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s2_tm1.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S2, <span style="color:CornflowerBlue">M1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s4_tm1.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S3, <span style="color:CornflowerBlue">M1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s6_tm1.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S4, <span style="color:CornflowerBlue">M1</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s7_tm1.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+
+      </div>
+
+
+      <div class="column">
+          <small><small>
+
+          <br><b>Target (<span style="color:DarkBlue">M4</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/reference/singing_M4_ref.mp3", type="audio/mp3">
+          </audio><br><br>
+          <b>Generated (S1, <span style="color:DarkBlue">M4</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s2_tm4.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S2, <span style="color:DarkBlue">M4</span>):</b>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s4_tm4.mp3", type="audio/mp3">
+          </audio><br>
+          <b>Generated (S3, <span style="color:DarkBlue">M4</span>):</b>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s6_tm4.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S4, <span style="color:DarkBlue">M4</span>):</b>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sing_s7_tm4.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <section class="section">
+  <div class="container is-widescreen">
+    <h2 class="title is-3" id="section_singing_pop_winter">Singing Voice Conversion Samples&mdash;Popular Music & Schubert Winterreise<a href="#contents"><small><small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;[Go to top]</small></small></small></small></a></h2>
+    <p align="justify">
+
+    The samples in this section are generated using the attention-based T5-Voc model, trained on vocal data and conditioned on <b>well-known singers</b> from popular music
+    as well as the Schubert Winterreise dataset. Vocal tracks were obtained through source separation software (see the <a href="#feature_extractors">repositories section</a> for details).
+<br>
+    Following the format of the previous section, each column corresponds to a different singer. The first row <b>("Target")</b> provides a real reference excerpt for each singer,
+      while the subsequent rows <b>("Generated")</b> contain singing excerpts that have been converted across the different singers, demonstrating the model’s ability to preserve phonetic and musical content while adapting timbre and style.
+    </p>
+
+    <div class="columns is-centered">
+
+      <div class="column">
+          <small><small>
+            <div style="height: 128px;">&nbsp;</div>
+          <b>Source 1 (Beatles, With a Little Help):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/pop_s5.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Source 2 (Creedence, Lookin' Out):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/pop_s1.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Source 3 (<span style="color:MediumVioletRed">Madonna</span>, Like a Virgin):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/pop_s4.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Source 4 (<span style="color:DarkCyan">Matti Caspi</span>, Hine Hine):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/pop_s3.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Source 5 (Ravitz, Derech Hameshi):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/sources/pop_s2.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+      </div>
+
+      <div class="column">
+          <small><small>
+            <br><b>Target (<span style="color:MediumSeaGreen">The Doors</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/reference/doors_ref.mp3", type="audio/mp3">
+          </audio><br><br>
+          <b>Generated (S1, <span style="color:MediumSeaGreen">The Doors</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s5_t1.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S2, <span style="color:MediumSeaGreen">The Doors</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s1_t1.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S3, <span style="color:MediumSeaGreen">The Doors</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s4_t1.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S4, <span style="color:MediumSeaGreen">The Doors</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s3_t1.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S5, <span style="color:MediumSeaGreen">The Doors</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s2_t1.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+      </div>
+
+
+
+      <div class="column">
+          <small><small>
+            <br><b>Target (<span style="color:MidnightBlue">Fischer-Dieskau</span>):</b><br>
+            <audio controls style="width: 240px; height: 50px">
+              <source src="static/samples/reference/fischer_dieskau_ref.mp3", type="audio/mp3">
+            </audio><br><br>
+            <b>Generated (S1, <span style="color:MidnightBlue">Fischer-Dieskau</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s5_t2.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S2, <span style="color:MidnightBlue">Fischer-Dieskau</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s1_t2.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S3, <span style="color:MidnightBlue">Fischer-Dieskau</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s4_t2.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S4, <span style="color:MidnightBlue">Fischer-Dieskau</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s3_t2.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S5, <span style="color:MidnightBlue">Fischer-Dieskau</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s2_t2.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+
+      </div>
+
+      <div class="column">
+          <small><small>
+            <br><b>Target (<span style="color:MediumVioletRed">Madonna</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/reference/madonna_ref.mp3", type="audio/mp3">
+          </audio><br><br>
+          <b>Generated (S1, <span style="color:MediumVioletRed">Madonna</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s5_t3.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S2, <span style="color:MediumVioletRed">Madonna</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s1_t3.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S3, <span style="color:MediumVioletRed">Madonna</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s4_t3.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S4, <span style="color:MediumVioletRed">Madonna</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s3_t3.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S5, <span style="color:MediumVioletRed">Madonna</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s2_t3.mp3", type="audio/mp3">
+          </audio><br>
+
+
+          </small></small>
+
+      </div>
+
+
+      <div class="column">
+          <!-- <h2 class="title is-7">Brahms Piano Concerto 1, Style: Mitsuko Uchida Playing Beethoven Piano Concertos</h2> -->
+          <small><small>
+            <br><b>Target (<span style="color:DarkCyan">Matti Caspi</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/reference/matti_caspi_ref.mp3", type="audio/mp3">
+          </audio><br><br>
+          <b>Generated (S1, <span style="color:DarkCyan">Matti Caspi</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s5_t4.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S2, <span style="color:DarkCyan">Matti Caspi</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s1_t4.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S3, <span style="color:DarkCyan">Matti Caspi</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s4_t4.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S4, <span style="color:DarkCyan">Matti Caspi</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s3_t4.mp3", type="audio/mp3">
+          </audio><br>
+
+          <b>Generated (S5, <span style="color:DarkCyan">Matti Caspi</span>):</b><br>
+
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/singing/pop_s2_t4.mp3", type="audio/mp3">
+          </audio><br><br>
+
+          </small></small>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <section class="section">
+  <div class="container is-widescreen">
+
+  <h2 class="title is-3" id="section_speech">Speech Voice Conversion Samples<a href="#contents"><small><small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;[Go to top]</small></small></small></small></a></h2>
+  <p align="justify">
+  This section presents speech voice conversion samples generated by our proposed attention-based T5-Voc model, trained on both speech and singing data.
+  The first column <b>("Source")</b> contains real speech excerpts, which are converted across target speakers shown in the subsequent columns.
+  The first row <b>("Target")</b> provides a real reference excerpt for each target speaker.
+  <br>
+  As in the previous sections, the model leverages the FiLM-based version conditioning mechanism, originally designed for acoustic conditioning in instrumental music synthesis,
+  to effectively condition on speaker identity in the speech domain.
+  <br>
+  For a comparative evaluation with the <b>FlowMAC</b> model (based on <b>MatchaTTS</b> and <b>ForwardTacotron</b>),
+  please refer to the <a href="#section_speech_mushra">speech MUSHRA-like listening test</a> section.
+</p>
+  <!-- In this section we provide speech voice conversion samples from our proposed attention-based T5-Voc model trained on vocal data (speech and singing).
+  The first column ("Source") provides real source excerpts which are converted across speakers.
+  Each of the next columns corresponds to a target speaker. The first row provides a real reference excerpt for each target speaker ("Target").
+  Similarly to the previous sections, it can be seen that the FiLM-based version conditioning mechanism originally used to condition on acoustics, can be used to condition on the speaker. -->
+
+  <!-- For a comparison with the FlowMAC model based on MatchaTTS and ForwardTacotron, see the section on the <a href="#section_speech_mushra">speech MUSHRA-like listening test.</a> -->
+  <div class="columns is-centered">
+    <div class="column">
+        <!-- <h2 class="title is-7">Brahms Piano Concerto 1, Style: Mitsuko Uchida Playing Beethoven Piano Concertos</h2> -->
+        <small><small>
+        <div style="height: 128px;">&nbsp;</div>
+        <b>Source 1:</b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/sources/speech_s1.mp3", type="audio/mp3">
+        </audio>
+
+        <b>Source 2 (<span style="color:SteelBlue">Tim</span>):</b><br>
+
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/sources/speech_s3.mp3", type="audio/mp3">
+        </audio>
+
+        <b>Source 3 (<span style="color:MediumOrchid">Chantal</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/sources/speech_s7.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Source 4 (<span style="color:MediumSlateBlue">Ian</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/sources/speech_s4.mp3", type="audio/mp3">
+        </audio>
+
+        <b>Source 5 (<span style="color:SteelBlue">Tim</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/sources/speech_s5.mp3", type="audio/mp3">
+        </audio><br><br>
+
+        </small></small>
+    </div>
+
+    <div class="column">
+        <small><small>
+        <br><b>Target (<span style="color:MediumOrchid">Chantal</span>):</b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/reference/speech_F1_ref.mp3", type="audio/mp3">
+        </audio><br><br>
+        <b>Generated (S1, <span style="color:MediumOrchid">Chantal</span>):</b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s1t2.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S2, <span style="color:MediumOrchid">Chantal</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s3t2.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S3, <span style="color:MediumOrchid">Chantal</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s7t2.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S4, <span style="color:MediumOrchid">Chantal</span>):</b><br>
+
+
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s4t2.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S5, <span style="color:MediumOrchid">Chantal</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s5t2.mp3", type="audio/mp3">
+        </audio><br><br>
+
+        </small></small>
+    </div>
+
+
+
+
+    <div class="column">
+        <small><small>
+        <br><b>Target (<span style="color:RebeccaPurple">Female 2</span>):</b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/reference/speech_F2_ref.mp3", type="audio/mp3">
+        </audio><br><br>
+
+        <b>Generated (S1, <span style="color:RebeccaPurple">Female 2</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s1t4.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S2, <span style="color:RebeccaPurple">Female 2</span>):</b><br>
+
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s3t4.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S3, <span style="color:RebeccaPurple">Female 2</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s7t4.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S4, <span style="color:RebeccaPurple">Female 2</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s4t4.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S5, <span style="color:RebeccaPurple">Female 2</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s5t4.mp3", type="audio/mp3">
+        </audio><br><br>
+
+        </small></small>
+
+    </div>
+
+    <div class="column">
+        <small><small>
+        <br><b>Target (<span style="color:SteelBlue">Tim</span>):</b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/reference/speech_M1_ref.mp3", type="audio/mp3">
+        </audio><br><br>
+        <b>Generated (S1, <span style="color:SteelBlue">Tim</span>):</b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s1t3.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S2, <span style="color:SteelBlue">Tim</span>):</b><br>
+
+
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s3t3.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S3, <span style="color:SteelBlue">Tim</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s7t3.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S4, <span style="color:SteelBlue">Tim</span>):</b><br>
+
+
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s4t3.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S5, <span style="color:SteelBlue">Tim</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s5t3.mp3", type="audio/mp3">
+        </audio><br><br>
+
+        </small></small>
+
+    </div>
+
+
+    <div class="column">
+        <small><small>
+          <br><b>Target (<span style="color:MediumSlateBlue">Ian</span>):</b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/reference/speech_M2_ref.mp3", type="audio/mp3">
+          </audio><br><br>
+          <b>Generated (S1, <span style="color:MediumSlateBlue">Ian</span>):</b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s1t5.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S2, <span style="color:MediumSlateBlue">Ian</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s3t5.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S3, <span style="color:MediumSlateBlue">Ian</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s7t5.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S4, <span style="color:MediumSlateBlue">Ian</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s4t5.mp3", type="audio/mp3">
+        </audio><br>
+
+        <b>Generated (S5, <span style="color:MediumSlateBlue">Ian</span>):</b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/s5t5.mp3", type="audio/mp3">
+        </audio><br><br>
+
+        </small></small>
+
+    </div>
+
+
+  </div>
+
+
+  </div>
+
+
+
+  <br><br>
+
+  <div class="container is-widescreen">
+    <h2 class="title is-3" id="section_speech_mushra">Speech MUSHRA-like Listening Test<a href="#contents"><small><small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;[Go to top]</small></small></small></small></a></h2>
+    <p align="justify">
+    The samples in this section are from the speech MUSHRA-like listening test. Several models are evaluated:
+    <b>PAD-Voc</b>: A voice conversion model based on <b>ForwardTacotron</b>, trained with a reconstruction loss.
+
+    <b>MAC-Voc:</b> The <b>FlowMAC</b> model, trained with a flow-matching objective, and conditioned on the output of PAD-Voc.
+
+    <b>T5-Voc:</b> Our proposed T5 attention-based diffusion model adapted from instrumental music synthesis to human voice conversion.
+
+    <b>T5-All</b>: The same model as T5-Voc, but trained on a broader dataset including instrumental music and vocal-instrumental mixtures, in addition to pure vocal data.
+  </p>
+    <br>
+
+  <small><small>
+
+
+  <div class="columns is-centered">
+    <div class="column">
+        <b>Reference:</b>
+        <br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s1_ref.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:PaleVioletRed">PAD-Voc</span></b>
+        <br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s1_padvc.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:MediumPurple">T5-All</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s1_t5mix.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:YellowGreen">MAC-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s1_padvccfm.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:DarkSlateBlue">T5-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s1_t5.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+
+  </div>
+
+
+
+
+
+
+  <div class="columns is-centered">
+    <div class="column">
+      <b>Reference:</b>
+      <br>
+      <audio controls style="width: 240px; height: 50px">
+        <source src="static/samples/speech/listening_test/lt_s2_ref.mp3", type="audio/mp3">
+      </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:PaleVioletRed">PAD-Voc</span></b>
+        <br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s2_padvc.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:MediumPurple">T5-All</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s2_t5mix.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:YellowGreen">MAC-Voc</span></b>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s2_padvccfm.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:DarkSlateBlue">T5-Voc</span></b>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s2_t5.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+
+  </div>
+
+
+
+
+
+  <div class="columns is-centered">
+    <div class="column">
+      <b>Reference:</b>
+      <br>
+      <audio controls style="width: 240px; height: 50px">
+        <source src="static/samples/speech/listening_test/lt_s3_ref.mp3", type="audio/mp3">
+      </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:PaleVioletRed">PAD-Voc</span></b>
+        <br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s3_padvc.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:MediumPurple">T5-All</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s3_t5mix.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:YellowGreen">MAC-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s3_padvccfm.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:DarkSlateBlue">T5-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/speech/listening_test/lt_s3_t5.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+
+  </div>
+
+
+
+
+
+  </small></small>
+
+
+  </div>
+
+  <br><br><br>
+
+
+  <div class="container is-widescreen">
+    <h2 class="title is-3" id="section_singing_mushra">Singing MUSHRA-like Listening Test<a href="#contents"><small><small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;[Go to top]</small></small></small></small></a></h2>
+    <p align="justify">
+    The samples in this section are from the singing MUSHRA-like listening test. Several models are evaluated:
+    <b>PAD-Voc</b>: A voice conversion model based on <b>ForwardTacotron</b>, trained with a reconstruction loss.
+
+    <b>MAC-Voc:</b> The <b>FlowMAC</b> model, trained with a flow-matching objective, and conditioned on the output of PAD-Voc.
+
+    <b>T5-Voc:</b> Our proposed T5 attention-based diffusion model adapted from instrumental music synthesis to human voice conversion.
+
+    <b>T5-All</b>: The same model as T5-Voc, but trained on a broader dataset that includes instrumental music and vocal-instrumental mixtures, in addition to pure vocal data.
+  </p>
+    <br>
+
+
+
+  <small><small>
+
+
+
+  <div class="columns is-centered">
+    <div class="column">
+      <b>Reference:</b>
+      <br>
+      <audio controls style="width: 240px; height: 50px">
+        <source src="static/samples/singing/listening_test/slt_s2_ref.mp3", type="audio/mp3">
+      </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:PaleVioletRed">PAD-Voc</span></b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s2_padvc.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:MediumPurple">T5-All</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s2_t5mix.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:YellowGreen">MAC-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s2_padvccfm.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:DarkSlateBlue">T5-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s2_t5.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+
+  </div>
+
+
+
+
+  <div class="columns is-centered">
+    <div class="column">
+      <b>Reference:</b>
+      <br>
+      <audio controls style="width: 240px; height: 50px">
+        <source src="static/samples/singing/listening_test/slt_s1_ref.mp3", type="audio/mp3">
+      </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:PaleVioletRed">PAD-Voc</span></b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s1_padvc.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:MediumPurple">T5-All</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s1_t5mix.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:YellowGreen">MAC-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s1_padvccfm.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:DarkSlateBlue">T5-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s1_t5.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+
+  </div>
+
+
+
+
+  <div class="columns is-centered">
+    <div class="column">
+      <b>Reference:</b>
+      <br>
+      <audio controls style="width: 240px; height: 50px">
+        <source src="static/samples/singing/listening_test/slt_s0_ref.mp3", type="audio/mp3">
+      </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:PaleVioletRed">PAD-Voc</span></b><br>
+
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s0_padvc.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:MediumPurple">T5-All</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s0_t5mix.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:YellowGreen">MAC-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s0_padvccfm.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+    <div class="column">
+        Model: <b><span style="color:DarkSlateBlue">T5-Voc</span></b><br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/singing/listening_test/slt_s0_t5.mp3", type="audio/mp3">
+        </audio>
+    </div>
+
+
+  </div>
+
+
+
+  </small></small>
+
+
+  </div>
+
+  <br>
+
+
+
+
+
+<br><br>
+    <div class="container is-widescreen">
+      <h2 class="title is-3" id="section_singing_similarity">Singer Similarity Listening Test<a href="#contents"><small><small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;[Go to top]</small></small></small></small></a></h2>
+      <p align="justify">
+      The samples in this section are taken from the <b>singer similarity listening test</b>. In this test, the same source excerpt is rendered using two different voices:
+      the <b>target singer</b> and a <b>randomly sampled other singer</b>. Listeners are asked to <b>rate the similarity to the target singer</b>.
+      <br>
+      We compare two models: <b>T5-Voc</b> and <b>MAC-Voc</b>, resulting in <b>four converted samples per source excerpt</b>. For each converted sample,
+      we also provide a <b>reference excerpt</b> (of different content) from the target singer, to guide the similarity judgment.
+    </p>
+    <small><small>
+
+    <br>
+
+
+
+
+
+    <div class="columns is-centered">
+      <div class="column">
+        <b>Target:</b>
+        <br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/similarity/sim_lt_s2_ref2.mp3", type="audio/mp3">
+        </audio>
+      </div>
+
+      <div class="column">
+          Model / Condition: <b><span style="color:SlateBlue">T5-Voc Other</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s2_t5_other.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+          Model / Condition: <b><span style="color:OliveDrab">MAC-Voc Other</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s2_padvccfm_other.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:YellowGreen">MAC-Voc</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s2_padvccfm.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+          Model / Condition: <b><span style="color:DarkSlateBlue">T5-Voc</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s2_t5.mp3", type="audio/mp3">
+          </audio>
+      </div>
+    </div>
+
+
+
+    <div class="columns is-centered">
+      <div class="column">
+        <b>Target:</b>
+        <br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/similarity/sim_lt_s3_ref3.mp3", type="audio/mp3">
+        </audio>
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:SlateBlue">T5-Voc Other</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s3_t5_other.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:OliveDrab">MAC-Voc Other</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s3_padvccfm_other.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:YellowGreen">MAC-Voc</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s3_padvccfm.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:DarkSlateBlue">T5-Voc</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s3_t5.mp3", type="audio/mp3">
+          </audio>
+      </div>
+    </div>
+
+
+
+    <div class="columns is-centered">
+      <div class="column">
+        <b>Target:</b>
+        <br>
+        <audio controls style="width: 240px; height: 50px">
+          <source src="static/samples/similarity/sim_lt_s4_ref0.mp3", type="audio/mp3">
+        </audio>
+
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:SlateBlue">T5-Voc Other</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s4_t5_other.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:OliveDrab">MAC-Voc Other</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s4_padvccfm_other.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:YellowGreen">MAC-Voc</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s4_padvccfm.mp3", type="audio/mp3">
+          </audio>
+      </div>
+
+      <div class="column">
+
+          Model / Condition: <b><span style="color:DarkSlateBlue">T5-Voc</span></b><br>
+          <audio controls style="width: 240px; height: 50px">
+            <source src="static/samples/similarity/sim_lt_s4_t5.mp3", type="audio/mp3">
+          </audio>
+      </div>
+    </div>
+
+
+
+
+    </small></small>
+
+
+
+  </div>
+
+  <br>
+
+  <section class="section">
+  <div class="container is-widescreen">
+    <h2 class="title is-3" id="section_mix">Vocal&ndash;Instrumental Conversion Samples<a href="#contents"><small><small><small><small>&nbsp;&nbsp;&nbsp;&nbsp;[Go to top]</small></small></small></small></a></h2>
+    <p align="justify">
+    The samples in this section are generated using the attention-based <b>T5-All</b> model, trained on a combined dataset of vocal and instrumental music.
+    The instrumental content was derived from automatically transcribed piano rolls.
+    <br>
+    For vocal-only samples generated by this model, refer to the MUSHRA-like listening test sections for <a href="#section_speech_mushra">speech</a> and <a href="#section_singing_mushra">singing</a>.
+    <br>
+    While this paper focuses on the evaluation of vocal synthesis, we plan to explore the generation of vocal-instrumental mixtures more extensively in future work.
+    </p>
+
+    <br>
+    <div class="columns is-centered">
+
+
+
+
+
+      <div class="column is-one-quarter">
+          <small><small>
+          Source: <b>Riders on The Storm (The Doors)</b><br>Target: <b><span style="color:MidnightBlue">Fischer-Dieskau</span></b>
+          <audio controls>
+            <source src="static/samples/mix/mix_s7_t3.mp3", type="audio/mp3">
+          </audio><br>
+          Source: <b>Martha My Dear (Beatles)</b><br>Target: <b><span style="color:MidnightBlue">Fischer-Dieskau</span></b>
+          <audio controls>
+            <source src="static/samples/mix/mix_s5_t3.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Like a Virgin (Madonna)</b><br>Target: <b><span style="color:MidnightBlue">Fischer-Dieskau</span></b>
+          <audio controls>
+            <source src="static/samples/mix/mix_s4_t3.mp3", type="audio/mp3">
+          </audio><br>
+
+Source: <b>Hine Hine (Matti Caspi)</b><br>Target: <b><span style="color:MidnightBlue">Fischer-Dieskau</span></b>
+          <audio controls>
+            <source src="static/samples/mix/mix_s3_t3.mp3", type="audio/mp3">
+          </audio><br><br>
+
+
+
+
+
+          </small></small>
+      </div>
+
+
+
+
+      <div class="column is-one-quarter">
+          <small><small>
+          Source: <b>Riders on The Storm (The Doors)</b><br>Target: <b><span style="color:MediumSeaGreen">The Doors</span></b>
+          <br>
+          <audio controls>
+            <source src="static/samples/mix/mix_s7_t2.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Martha My Dear (Beatles)</b><br>Target: <b><span style="color:MediumSeaGreen">The Doors</span></b>
+          <br>
+          <audio controls>
+            <source src="static/samples/mix/mix_s5_t2.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Like a Virgin (Madonna)</b><br>Target: <b><span style="color:MediumSeaGreen">The Doors</span></b>
+          <br>
+          <audio controls>
+            <source src="static/samples/mix/mix_s4_t2.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Hine Hine (Matti Caspi)</b><br>Target: <b><span style="color:MediumSeaGreen">The Doors</span></b><br>
+
+          <audio controls>
+            <source src="static/samples/mix/mix_s3_t2.mp3", type="audio/mp3">
+          </audio><br><br>
+
+
+          </small></small>
+      </div>
+
+
+      <div class="column is-one-quarter">
+          <small><small>
+          Source: <b>Riders on The Storm (The Doors)</b><br>Target: <b><span style="color:FireBrick">Jimi Hendrix</span></b>
+          <br>
+          <audio controls>
+            <source src="static/samples/mix/mix_s7_t1.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Martha My Dear (Beatles)</b><br>Target: <b><span style="color:MediumVioletRed">Madonna</span></b>
+          <br>
+          <audio controls>
+            <source src="static/samples/mix/mix_s5_t4.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Holiday (Madonna)</b><br>Target: <b><span style="color:MediumVioletRed">Madonna</span></b>
+          <br>
+          <audio controls>
+            <source src="static/samples/mix/mix_s6_t4.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Hine Hine (Matti Caspi)</b><br>Target: <b><span style="color:HotPink">Metallica</span></b><br>
+
+          <audio controls>
+            <source src="static/samples/mix/mix_s3_t5.mp3", type="audio/mp3">
+          </audio><br><br>
+
+
+          </small></small>
+      </div>
+
+
+      <div class="column is-one-quarter">
+          <small><small>
+            Source: <b>Riders on The Storm (The Doors)</b><br>Target: <b>Creedence Clearwater Revival</b>
+            <br>
+
+
+          <audio controls>
+            <source src="static/samples/mix/mix_s7_t6.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Martha My Dear (Beatles)</b><br>Target: <b><span style="color:FireBrick">Jimi Hendrix</span></b>
+          <br>
+
+          <audio controls>
+            <source src="static/samples/mix/mix_s5_t1.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Holiday (Madonna)</b><br>Target: <b><span style="color:HotPink">Metallica</span></b>
+          <br>
+
+          <audio controls>
+            <source src="static/samples/mix/mix_s6_t5.mp3", type="audio/mp3">
+          </audio><br>
+
+          Source: <b>Hine Hine (Matti Caspi)</b><br>Target: <b><span style="color:FireBrick">Jimi Hendrix</span></b><br>
+
+
+
+          <audio controls>
+            <source src="static/samples/mix/mix_s3_t1.mp3", type="audio/mp3">
+          </audio><br><br>
+
+
+          </small></small>
+      </div>
+
+
+
+
+
+
+
+    </div>
+
+
+
+
+
+
+
+  </div>
+
+  <br><br><br>
+
+
+
+
+    <script>
+    function myFunction_alignment() {
+      var x = document.getElementById("buttonDiv_alignment");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
+    </script>
+
+
+
+
+
+
+
+
+
+  <br>
+
+  </small></small>
+  <br>
+
+  <script>
+  function myFunction_pitch() {
+    var x = document.getElementById("buttonDiv_pitch");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+
+  }
+  </script>
+
+
+
+
+
+  <script>
+  function myFunction_transcription() {
+    var x = document.getElementById("buttonDiv_transcription");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+  </script>
+
+
+<br><br>
+
+
+
+</section>
+
+
+
+
+
+  </body>
+  </html>
